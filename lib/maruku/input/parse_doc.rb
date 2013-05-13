@@ -19,9 +19,6 @@
 #++
 
 
-require 'iconv'
-
-
 module MaRuKu; module In; module Markdown; module BlockLevelParser
 		
 	def parse_doc(s)
@@ -46,7 +43,7 @@ Conversion happens using the `iconv` library.
 		enc = self.attributes[:encoding]
 		self.attributes.delete :encoding
 		if enc && enc.downcase != 'utf-8'
-			converted = Iconv.new('utf-8', enc).iconv(data)
+			converted = data.encode(enc)
 			
 #			puts "Data: #{data.inspect}: #{data}"
 #			puts "Conv: #{converted.inspect}: #{converted}"
